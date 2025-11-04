@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Kumbh Sans", sans-serif;
+}
+
+:root {
+  /* Primary Colors */
+  --orange: hsl(26, 100%, 55%);
+  --pale-orange: hsl(25, 100%, 94%);
+
+  /* Neutral Colors */
+  --very-dark-blue: hsl(220, 13%, 13%);
+  --dark-grayish-blue: hsl(219, 9%, 45%);
+  --grayish-blue: hsl(220, 14%, 75%);
+  --light-grayish-blue: hsl(223, 64%, 98%);
+  --white: hsl(0, 0%, 100%);
+  --black-lightbox: hsla(0, 0%, 0%, 0.75); /* 75% opacity */
+}
+
+p {
+  font-size: 16px;
+  color: var(--dark-grayish-blue);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav {
+  display: none;
+}
+
+#grid {
+    margin: 0 24px;
+}
+
+#brand {
+  text-transform: uppercase;
+  color: var(--dark-grayish-blue);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+#original-price {
+  color: var(--dark-grayish-blue);
+  font-weight: 700;
+}
+
+#discounted-price {
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+#reduced {
+  color: var(--white);
+  background-color: #000;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-weight: 700;
+}
