@@ -20,8 +20,9 @@
 
     <header>
       <div id="left">
-        <a href="#"><img src="images/icon-menu.svg" alt="" /></a>
+        <a href="#"><img id="menu" src="images/icon-menu.svg" alt="menu" /></a>
         <nav>
+          <img tabindex="0" id="close" src="images/icon-close.svg" alt="close">
           <ul id="menu">
             <li>Collections</li>
             <li>Men</li>
@@ -34,8 +35,8 @@
       </div>
 
       <div id="right">
-        <img src="images/icon-cart.svg" alt="shopping-cart" />
-        <img src="images/image-avatar.png" alt="avatar-image" />
+        <img class="cart" src="images/icon-cart.svg" alt="shopping-cart" />
+        <img id="avatar" src="images/image-avatar.png" alt="avatar-image" />
       </div>
     </header>
 
@@ -82,7 +83,7 @@
         </button>
       </div>
       <button id="add-to-cart">
-        <img src="images/icon-cart.svg" alt="add-to-cart" /><span>Add to cart</span>
+        <img class="cart" src="images/icon-cart.svg" alt="add-to-cart" /><span>Add to cart</span>
       </button>
 
       <!-- PURCHASE -->
