@@ -24,6 +24,7 @@
 p {
   font-size: 16px;
   color: var(--dark-grayish-blue);
+  line-height: 25px;
 }
 
 body {
@@ -42,8 +43,12 @@ nav {
   display: none;
 }
 
+h1 {
+  margin: 7px 0 15px 0;
+}
+
 #grid {
-    margin: 0 24px;
+  margin: 0 24px;
 }
 
 #brand {
@@ -52,6 +57,14 @@ nav {
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 2px;
+}
+
+#price {
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #original-price {
@@ -70,4 +83,74 @@ nav {
   padding: 3px 8px;
   border-radius: 5px;
   font-weight: 700;
+  font-size: 16px;
+  position: relative;
+  left: 14px;
+  bottom: 3px;
+}
+
+.quantity-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 48px;
+  border-radius: 9px;
+  background-color: var(--light-grayish-blue);
+}
+
+#decrease,
+#quantity,
+#increase {
+  border: none;
+  text-align: center;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
+
+#quantity {
+  width: 65%;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+#increase {
+  position: relative;
+  top: 2px;
+}
+
+#decrease {
+  position: relative;
+  bottom: 2px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+#add-to-cart {
+  width: 100%;
+  background-color: var(--orange);
+  color: #000;
+  border: 2px solid var(--orange);
+  border-radius: 9px;
+  font-weight: 700;
+  padding: 12px;
+  margin: 15px 0;
+  box-shadow: 0 24px 12px var(--pale-orange);
+}
+
+#add-to-cart img {
+  filter: brightness(0);
+  margin-right: 12px;
+  height: 13px;
 }
