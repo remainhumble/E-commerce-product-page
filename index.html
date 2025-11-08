@@ -20,9 +20,16 @@
 
     <header>
       <div id="left">
-        <a href="#"><img id="menu" src="images/icon-menu.svg" alt="menu" /></a>
+        <a href="#"
+          ><img id="hamburger" src="images/icon-menu.svg" alt="menu"
+        /></a>
         <nav>
-          <img tabindex="0" id="close" src="images/icon-close.svg" alt="close">
+          <img
+            tabindex="0"
+            id="close"
+            src="images/icon-close.svg"
+            alt="close"
+          />
           <ul id="menu">
             <li>Collections</li>
             <li>Men</li>
@@ -44,48 +51,85 @@
 
     <div id="grid">
       <!-- SLIDESHOW -->
+      <div class="slider">
+        <!-- <div class="slides">
+          <div
+            class="box one"
+            data-title="First Slide"
+            data-img="images/image-product-1.jpg"
+          >
+            <img src="images/image-product-1.jpg" alt="image-product-1" />
+          </div>
+          <div
+            class="box two"
+            data-title="Second Slide"
+            data-img="images/image-product-2.jpg"
+          >
+            <img src="images/image-product-2.jpg" alt="image-product-2" />
+          </div>
+          <div
+            class="box three"
+            data-title="Third Slide"
+            data-img="images/image-product-3.jpg"
+          >
+            <img src="images/image-product-3.jpg" alt="image-product-3" />
+          </div>
+        </div> -->
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+
+        <h4 id="title"></h4>
+        <div id="image"></div>
+      </div>
+
 
       <!-- SLIDESHOW -->
 
       <!-- DESCRIPTION -->
 
-      <span id="brand">Sneaker Company</span>
-      <h1>Fall Limited Edition Sneakers</h1>
-      <p>
-        These low-profile sneakers are your perfect casual wear companion.
-        Featuring a durable rubber outer sole, they’ll withstand everything the
-        weather can offer.
-      </p>
+      <div id="info">
+        <span id="brand">Sneaker Company</span>
+        <h1>Fall Limited Edition Sneakers</h1>
+        <p>
+          These low-profile sneakers are your perfect casual wear companion.
+          Featuring a durable rubber outer sole, they’ll withstand everything
+          the weather can offer.
+        </p>
 
-      <!-- DESCRIPTION -->
+        <!-- DESCRIPTION -->
 
-      <!-- PURCHASE -->
+        <!-- PURCHASE -->
 
-      <div id="price">
-        <span id="discounted-price">$125.00<span id="reduced">50%</span></span>
-        <span id="original-price"><strike>$250.00</strike></span>
-      </div>
+        <div id="price">
+          <span id="discounted-price"
+            >$125.00<span id="reduced">50%</span></span
+          >
+          <span id="original-price"><s>$250.00</s></span>
+        </div>
 
-      <div class="quantity-wrapper">
-        <button id="decrease">
-          <img src="images/icon-minus.svg" alt="" />
+        <div class="quantity-wrapper">
+          <button id="decrease">
+            <img src="images/icon-minus.svg" alt="" />
+          </button>
+          <input
+            type="number"
+            id="quantity"
+            class="quantity-input"
+            value="0"
+            min="1"
+            max="10"
+          />
+          <button id="increase">
+            <img src="images/icon-plus.svg" alt="" />
+          </button>
+        </div>
+        <button id="add-to-cart">
+          <span>
+            <img class="cart" src="images/icon-cart.svg" alt="add-to-cart" />Add
+            to cart</span
+          >
         </button>
-        <input
-          type="number"
-          id="quantity"
-          class="quantity-input"
-          value="0"
-          min="1"
-          max="10"
-        />
-        <button id="increase">
-          <img src="images/icon-plus.svg" alt="" />
-        </button>
       </div>
-      <button id="add-to-cart">
-        <img class="cart" src="images/icon-cart.svg" alt="add-to-cart" /><span>Add to cart</span>
-      </button>
-
       <!-- PURCHASE -->
     </div>
   </body>
