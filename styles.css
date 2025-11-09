@@ -34,7 +34,6 @@ p {
 
 body {
   background-color: var(--white);
-  width: 100%;
 }
 
 header {
@@ -47,6 +46,7 @@ header {
   top: 0;
   background-color: var(--white);
   z-index: var(--z-index-header);
+  width: 100%;
 }
 
 #left,
@@ -224,52 +224,30 @@ input[type="number"] {
 
 /* SLIDES */
 
-header {
+#display img {
+  /* border: 1px solid black; */
   width: 100%;
 }
 
-.slides {
+img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* keeps aspect ratio */
+}
+
+.small {
+  width: 50px;
+  height: 50px;
+}
+
+.small-img-row {
+  margin: 30px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
-.one {
-  /* display: none; */
-}
-
-.two {
-  width: 80px;
-  height: 80px;
-  display: none;
-}
-
-.three {
-  width: 80px;
-  height: 80px;
-  display: none;
-}
-
-.slider {
-  position: relative;
-  width: 100%;
-  height: 30em;
-  margin: auto;
-  border: 1px solid black;
-  border-radius: 16px;
-}
-
-.slider button {
-  position: absolute;
-  top: 50%;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  transform: translateY(-50%);
-  font-size: 15px;
-  font-weight: 700;
-  background: var(--white);
-  color: var(--black-lightbox);
-  border: none;
+.small-img-col {
+  flex-basis: 24%;
   cursor: pointer;
 }
 
@@ -284,29 +262,50 @@ header {
 @media (min-width: 1025px) {
   body {
     display: flex;
-    align-items: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
   }
 
-  .slider {
-    position: relative;
-    width: 100%;
-    height: 30em;
-    margin: auto;
-    border: 1px solid black;
+  header {
+    width: 90%;
+    position: fixed;
+    top: 0;
   }
 
   #grid {
+    margin-top: 8%;
     display: grid;
     grid-template-columns: auto auto;
-    gap: 20px;
+    gap: 70px;
     place-items: center; /* Centers both horizontally and vertically */
-    height: 100vh; /* Full viewport height */
   }
 
-  .slider,
+.slideshow {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+  #display img {
+    border-radius: 20px; width: 15em;
+  }
+
+  .slideshow,
   #info {
+
     width: 30em;
+  }
+
+  .small-img-row {
+    margin: 30px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .small-img-col {
+    flex-basis: 24%;
+    cursor: pointer;
   }
 }

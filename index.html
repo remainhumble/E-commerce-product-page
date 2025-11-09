@@ -51,37 +51,40 @@
 
     <div id="grid">
       <!-- SLIDESHOW -->
-      <div class="slider">
-        <!-- <div class="slides">
-          <div
-            class="box one"
-            data-title="First Slide"
-            data-img="images/image-product-1.jpg"
-          >
-            <img src="images/image-product-1.jpg" alt="image-product-1" />
+      <div class="slideshow">
+        <div id="display">
+          <img
+            id="image-product"
+            src="images/image-product-1.jpg"
+            alt="image-product-1"
+          />
+        </div>
+        <div class="small-img-row">
+          <div class="small-img-col">
+            <img
+              class="small"
+              src="https://tse2.mm.bing.net/th/id/OIP.6ej0nEn9GFm_4ht7-xNsYQHaQd?cb=ucfimgc2&rs=1&pid=ImgDetMain&o=7&rm=3"
+              alt=""
+            />
           </div>
-          <div
-            class="box two"
-            data-title="Second Slide"
-            data-img="images/image-product-2.jpg"
-          >
-            <img src="images/image-product-2.jpg" alt="image-product-2" />
+          <div class="small-img-col">
+            <img
+              class="small"
+              width="100%"
+              src="https://tse2.mm.bing.net/th/id/OIP.UcP7lGTyY_FE9gkLVflhzwHaNL?cb=ucfimgc2&rs=1&pid=ImgDetMain&o=7&rm=3"
+              alt=""
+            />
           </div>
-          <div
-            class="box three"
-            data-title="Third Slide"
-            data-img="images/image-product-3.jpg"
-          >
-            <img src="images/image-product-3.jpg" alt="image-product-3" />
+          <div class="small-img-col">
+            <img
+              width="100%"
+              class="small"
+              src="https://images.wallpapersden.com/image/download/satoru-gojo-jujutsu-kaisen-fortnite_bmZnZmuUmZqaraWkpJRmbmdlrWZlbWU.jpg"
+              alt=""
+            />
           </div>
-        </div> -->
-        <button class="prev" onclick="prevSlide()">&#10094;</button>
-        <button class="next" onclick="nextSlide()">&#10095;</button>
-
-        <h4 id="title"></h4>
-        <div id="image"></div>
+        </div>
       </div>
-
 
       <!-- SLIDESHOW -->
 
@@ -125,8 +128,12 @@
         </div>
         <button id="add-to-cart">
           <span>
-            <img class="cart" src="images/icon-cart.svg" alt="add-to-cart" />Add
-            to cart</span
+            <img
+              style="filter: brightness(0)"
+              class="cart"
+              src="images/icon-cart.svg"
+              alt="add-to-cart"
+            />Add to cart</span
           >
         </button>
       </div>
