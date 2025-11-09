@@ -14,19 +14,21 @@
 
     <title>Frontend Mentor | E-commerce product page</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
     <!-- HEADER -->
 
-    <header>   <nav aria-label="Main navigation" id="desktop-menu">
-          <ul role="menu">
-            <li>Collections</li>
-            <li>Men</li>
-            <li>Women</li>
-            <li>About</li>
-            <li>Contact</li>
-          </ul>
-        </nav>
+    <header>
+      <nav aria-label="Main navigation" id="desktop-menu">
+        <ul role="menu">
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">Men</a></li>
+          <li><a href="#">Women</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
       <div id="left">
         <a href="#" id="menu"
           ><img id="hamburger" src="images/icon-menu.svg" alt="menu"
@@ -34,23 +36,18 @@
         <nav aria-label="Main navigation" id="mobile-menu">
           <ul role="menu">
             <li>
-              <img
-                tabindex="0"
-                id="close"
-                src="images/icon-close.svg"
-                alt="close"
-              />
+              <a href="#">
+                <img id="close" src="images/icon-close.svg" alt="close"
+              /></a>
             </li>
-            <li>Collections</li>
-            <li>Men</li>
-            <li>Women</li>
-            <li>About</li>
-            <li>Contact</li>
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
           </ul>
         </nav>
         <img src="images/logo.svg" alt="logo" />
-
-      
       </div>
 
       <div id="right">
@@ -64,13 +61,36 @@
     <div id="grid">
       <!-- SLIDESHOW -->
       <div class="slideshow">
-        <div id="display">
-          <img
-            id="image-product"
-            src="images/image-product-1.jpg"
-            alt="image-product-1"
-          />
+        <div id="slides">
+          <div id="display">
+            <img
+              class="image-product"
+              src="images/image-product-1.jpg"
+              alt="image-product-1"
+            />
+            <img
+              style="display: none"
+              class="image-product"
+              src="images/image-product-2.jpg"
+              alt="image-product-2"
+            />
+            <img
+              style="display: none"
+              class="image-product"
+              src="images/image-product-3.jpg"
+              alt="image-product-3"
+            />
+            <img
+              class="image-product"
+              style="display: none"
+              src="images/image-product-4.jpg"
+              alt="image-product-4"
+            />
+          </div>
+          <button class="prev" onclick="prevSlide()">&#10094;</button>
+          <button class="next" onclick="nextSlide()">&#10095;</button>
         </div>
+
         <div class="small-img-row">
           <div class="small-img-col">
             <img
