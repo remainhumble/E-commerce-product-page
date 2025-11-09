@@ -18,19 +18,8 @@
   <body>
     <!-- HEADER -->
 
-    <header>
-      <div id="left">
-        <a href="#"
-          ><img id="hamburger" src="images/icon-menu.svg" alt="menu"
-        /></a>
-        <nav>
-          <img
-            tabindex="0"
-            id="close"
-            src="images/icon-close.svg"
-            alt="close"
-          />
-          <ul id="menu">
+    <header>   <nav aria-label="Main navigation" id="desktop-menu">
+          <ul role="menu">
             <li>Collections</li>
             <li>Men</li>
             <li>Women</li>
@@ -38,7 +27,30 @@
             <li>Contact</li>
           </ul>
         </nav>
-        <img src="images/logo.svg" alt="" />
+      <div id="left">
+        <a href="#" id="menu"
+          ><img id="hamburger" src="images/icon-menu.svg" alt="menu"
+        /></a>
+        <nav aria-label="Main navigation" id="mobile-menu">
+          <ul role="menu">
+            <li>
+              <img
+                tabindex="0"
+                id="close"
+                src="images/icon-close.svg"
+                alt="close"
+              />
+            </li>
+            <li>Collections</li>
+            <li>Men</li>
+            <li>Women</li>
+            <li>About</li>
+            <li>Contact</li>
+          </ul>
+        </nav>
+        <img src="images/logo.svg" alt="logo" />
+
+      
       </div>
 
       <div id="right">
