@@ -1,33 +1,46 @@
 const hamburgerBtn = document.getElementById("hamburger");
 const closeBtn = document.getElementById("close");
 const mobileMenu = document.getElementById("mobile-menu");
+const slides = document.querySelectorAll(".display img");
+let slideIndex = 0;
+let intervalId = null;
 
-let slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
+const initializeSlider = () => {
+  // To avoid displaying an image if there aren't any
+  if (slides.length > 0) {
+    slides[slideIndex].classList.add("displaySlide");
+    intervalId = setInterval(nextSlide, 5000);
   }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
+};
 
-}
+const showSlide = (index) => {
+  if (index >= slides.length) {
+    slideIndex = 0;
+  } else if (index < 0) {
+    slideIndex = slides.length - 1; // set it to the end.
+  }
+
+  slides.forEach((slide) => {
+    slide.classList.remove("displaySlide");
+  });
+
+  slides[slideIndex].classList.add("displaySlide");
+};
+
+const prevSlide = () => {
+  slideIndex--;
+  showSlide(slideIndex);
+};
+
+const nextSlide = () => {
+  slideIndex++;
+  showSlide(slideIndex);
+};
+
+const currentSlide = (n) => {
+  slideIndex = n - 1; // slides are 0-based
+  showSlide(slideIndex);
+};
 
 const sideBar = () => {
   mobileMenu.style.width = "250px";
@@ -39,3 +52,4 @@ const closeSideBar = () => {
 
 hamburgerBtn.addEventListener("click", sideBar);
 closeBtn.addEventListener("click", closeSideBar);
+initializeSlider();
