@@ -257,12 +257,6 @@ img {
   cursor: pointer;
 }
 
-.small-img-col.displaySlide {
-  display: block;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
 .slideshow {
   position: relative;
   margin: auto;
