@@ -96,7 +96,7 @@ header {
 }
 
 #mobile-menu a:hover {
-border-bottom: 3px solid var(--orange);
+  border-bottom: 3px solid var(--orange);
 }
 
 #desktop-menu {
@@ -169,9 +169,9 @@ h1 {
   background-color: var(--light-grayish-blue);
 }
 
-#decrease,
+#decrement,
 #quantity,
-#increase {
+#increment {
   border: none;
   text-align: center;
   outline: none;
@@ -185,11 +185,11 @@ h1 {
   font-size: 16px;
 }
 
-#increase {
+#increment {
   margin-top: 3px;
 }
 
-#decrease {
+#decrement {
   margin-bottom: 3px;
 }
 
@@ -239,7 +239,7 @@ img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain; /* keeps aspect ratio */
-color: hsl(25, 100%, 94%);
+  color: hsl(25, 100%, 94%);
 }
 
 .small {

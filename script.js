@@ -2,7 +2,6 @@ const hamburgerBtn = document.getElementById("hamburger");
 const closeBtn = document.getElementById("close");
 const mobileMenu = document.getElementById("mobile-menu");
 const slides = document.querySelectorAll(".display img");
-// Select all small images
 const small = document.querySelectorAll(".small");
 let slideIndex = 0;
 let intervalId = null;
@@ -69,6 +68,33 @@ const sideBar = () => {
 const closeSideBar = () => {
   mobileMenu.style.width = "0";
 };
+
+const incrementBtn = document.getElementById("increment");
+const decrementBtn = document.getElementById("decrement");
+
+let data = 0;
+// Update the displayed count and disable decrement if at zero
+function updateDisplay() {
+  document.getElementById("counting").innerText = data;
+  decrementBtn.disabled = data === 0;
+}
+
+//printing default value of data that is 0 in h2 tag
+document.getElementById("counting").innerText = data;
+
+//creation of increment function
+function increment() {
+  data = data + 1;
+  document.getElementById("counting").innerText = data;
+  updateDisplay();
+}
+
+//creation of decrement function
+function decrement() {
+  data = data - 1;
+  document.getElementById("counting").innerText = data;
+  updateDisplay();
+}
 
 hamburgerBtn.addEventListener("click", sideBar);
 closeBtn.addEventListener("click", closeSideBar);

@@ -130,20 +130,30 @@
         </div>
 
         <div class="quantity-wrapper">
-          <button id="decrease">
-            <img src="images/icon-minus.svg" alt="decrease-quantity" />
+          <button id="decrement" onclick="decrement()">
+            <img
+              src="images/icon-minus.svg"
+              alt="decrease-quantity"
+              onclick="decrease()"
+            />
           </button>
-          <input
+          <h2 id="counting"></h2>
+          <button id="increment" onclick="increment()">
+            <img src="images/icon-plus.svg" alt="increase-quantity" />
+          </button>
+          <!-- <button id="decrease">
+          
+          </button>
+          <div
             type="number"
             id="quantity"
             class="quantity-input"
-            value="0"
-            min="1"
-            max="10"
-          />
-          <button id="increase">
-            <img src="images/icon-plus.svg" alt="increase-quantity" />
-          </button>
+            
+          ></div>
+          <button id="increase" onclick="increase()">
+            
+            +
+          </button> -->
         </div>
         <button id="add-to-cart">
           <span>
