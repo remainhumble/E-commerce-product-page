@@ -1,5 +1,6 @@
 const hamburgerBtn = document.getElementById("hamburger");
 const closeBtn = document.getElementById("close");
+const overlay = document.getElementById("overlay");
 const mobileMenu = document.getElementById("mobile-menu");
 const slides = document.querySelectorAll(".display img");
 const small = document.querySelectorAll(".small");
@@ -63,10 +64,12 @@ small.forEach((img) => {
 
 const sideBar = () => {
   mobileMenu.style.width = "250px";
+  overlay.style.display = "block";
 };
 
 const closeSideBar = () => {
   mobileMenu.style.width = "0";
+  overlay.style.display = "none";
 };
 
 const incrementBtn = document.getElementById("increment");
@@ -95,6 +98,29 @@ function decrement() {
   document.getElementById("counting").innerText = data;
   updateDisplay();
 }
+
+const lightbox = document.createElement("div");
+lightbox.id = "lightbox";
+document.body.appendChild(lightbox);
+
+function showImageInLightbox(image) {
+  lightbox.classList.add("active");
+  const img = document.createElement("img");
+  img.src = image.src;
+  while (lightbox.firstChild) {
+    lightbox.removeChild(lightbox.firstChild);
+  }
+  lightbox.appendChild(img);
+}
+
+slides.forEach((image) => {
+  image.addEventListener("click", () => showImageInLightbox(image));
+});
+
+lightbox.addEventListener("click", (e) => {
+  if (e.target !== e.currentTarget) return;
+  lightbox.classList.remove("active");
+});
 
 hamburgerBtn.addEventListener("click", sideBar);
 closeBtn.addEventListener("click", closeSideBar);
