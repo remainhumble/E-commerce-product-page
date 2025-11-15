@@ -105,8 +105,6 @@ function decrement() {
   updateDisplay();
 }
 
-
-
 slides.forEach((image) => {
   image.addEventListener("click", () => showImageInLightbox(image));
 });
@@ -114,6 +112,23 @@ slides.forEach((image) => {
 // lightbox.addEventListener("click", (e) => {
 //   if (e.target !== e.currentTarget) return;
 //   lightbox.classList.remove("active");
+// });
+
+// Loop through each image
+slides.forEach(item => {
+  item.addEventListener("click", () => {
+    lightBox.style.display = "flex";   // show the lightbox
+    lightboxContainer.src = item.src;        // update image
+  });
+});
+
+// Open lightbox on image click
+// slides.forEach((item, index) => {
+//   item.addEventListener("click", () => {
+//     lightBox.style.display = "flex";
+//     slideIndex = index; // track which image was clicked
+//     showSlide(slideIndex);
+//   });
 // });
 
 hamburgerBtn.addEventListener("click", sideBar);
