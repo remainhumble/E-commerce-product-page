@@ -5,6 +5,11 @@ const mobileMenu = document.getElementById("mobile-menu");
 const slides = document.querySelectorAll(".display img");
 const small = document.querySelectorAll(".small");
 const slideshow = document.querySelectorAll(".slideshow");
+const lightBox = document.getElementById("lightBox");
+const lightboxImages = document.querySelectorAll("#lightBox .display img");
+const lightboxContainer = document.getElementById("lightboxContainer");
+const close = document.getElementById("close");
+
 let slideIndex = 0;
 let intervalId = null;
 
@@ -100,19 +105,7 @@ function decrement() {
   updateDisplay();
 }
 
-// const lightbox = document.createElement("div");
-// lightbox.id = "lightbox";
-// document.body.appendChild(lightbox);
 
-// function showImageInLightbox(image) {
-//   lightbox.classList.add("active");
-//   const img = document.createElement("img");
-//   img.src = image.src;
-//   while (lightbox.firstChild) {
-//     lightbox.removeChild(lightbox.firstChild);
-//   }
-//   lightbox.appendChild(img);
-// }
 
 slides.forEach((image) => {
   image.addEventListener("click", () => showImageInLightbox(image));
