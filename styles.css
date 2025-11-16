@@ -310,6 +310,8 @@ img {
   margin: 0 auto;
 }
 
+
+
 @media (min-width: 1025px) {
   .display {
     position: relative;
@@ -449,6 +451,19 @@ img {
       max-height: 300px;
       border-radius: 8px;
       object-fit: cover;
+    }
+    #close-lightbox {
+      position: relative;
+      bottom: 12px;
+      left: 150px;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+    }
+
+    #close-lightbox:hover {
+      filter: brightness(0) saturate(100%) invert(66%) sepia(33%)
+        saturate(6571%) hue-rotate(347deg) brightness(101%) contrast(101%);
     }
   }
 

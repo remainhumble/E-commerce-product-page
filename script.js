@@ -9,6 +9,7 @@ const lightBox = document.getElementById("lightBox");
 const lightboxImages = document.querySelectorAll("#lightBox .display img");
 const lightboxContainer = document.getElementById("lightboxContainer");
 const close = document.getElementById("close");
+const closeLightbox = document.getElementById("close-lightbox");
 
 let slideIndex = 0;
 let intervalId = null;
@@ -51,23 +52,6 @@ const currentSlide = (n) => {
   showSlide(slideIndex);
 };
 
-// Loop through each one
-small.forEach((img) => {
-  img.addEventListener("click", () => {
-    // Change the big image
-    document.querySelector(".displaySlide").src = img.src;
-
-    // Remove border from all thumbnails
-    small.forEach((s) => (s.style.border = "none"));
-    small.forEach((s) => (s.style.opacity = "1"));
-
-    // Add styles to the clicked one
-    img.style.opacity = 0.5;
-    img.style.border = "3px solid orange";
-    clearInterval(intervalId); // allow user to take some time to view an image
-  });
-});
-
 const sideBar = () => {
   mobileMenu.style.width = "250px";
   overlay.style.display = "block";
@@ -76,6 +60,10 @@ const sideBar = () => {
 const closeSideBar = () => {
   mobileMenu.style.width = "0";
   overlay.style.display = "none";
+};
+
+const closeLightBox = () => {
+  lightBox.style.display = "none";
 };
 
 const incrementBtn = document.getElementById("increment");
@@ -105,32 +93,35 @@ function decrement() {
   updateDisplay();
 }
 
-slides.forEach((image) => {
-  image.addEventListener("click", () => showImageInLightbox(image));
-});
-
-// lightbox.addEventListener("click", (e) => {
-//   if (e.target !== e.currentTarget) return;
-//   lightbox.classList.remove("active");
-// });
+const showLightBox = () => {
+  lightBox.style.display = "flex"; // show the lightbox
+  lightboxContainer.src = item.src; // update image
+};
 
 // Loop through each image
-slides.forEach(item => {
-  item.addEventListener("click", () => {
-    lightBox.style.display = "flex";   // show the lightbox
-    lightboxContainer.src = item.src;        // update image
+slides.forEach((item) => {
+  item.addEventListener("click", showLightBox);
+});
+
+// Loop through each one
+small.forEach((img) => {
+  img.addEventListener("click", () => {
+    // Change the big image
+    document.querySelector(".displaySlide").src = img.src;
+    lightboxContainer.src = img.src;
+
+    // Remove border from all thumbnails
+    small.forEach((s) => (s.style.border = "none"));
+    small.forEach((s) => (s.style.opacity = "1"));
+
+    // Add styles to the clicked one
+    img.style.opacity = 0.5;
+    img.style.border = "3px solid orange";
+    clearInterval(intervalId); // allow user to take some time to view an image
   });
 });
 
-// Open lightbox on image click
-// slides.forEach((item, index) => {
-//   item.addEventListener("click", () => {
-//     lightBox.style.display = "flex";
-//     slideIndex = index; // track which image was clicked
-//     showSlide(slideIndex);
-//   });
-// });
-
 hamburgerBtn.addEventListener("click", sideBar);
 closeBtn.addEventListener("click", closeSideBar);
+closeLightbox.addEventListener("click", closeLightBox);
 initializeSlider();
