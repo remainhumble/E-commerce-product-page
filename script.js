@@ -22,6 +22,7 @@ const initializeSlider = () => {
   }
 };
 
+// Show slide by index
 const showSlide = (index) => {
   if (index >= slides.length) {
     slideIndex = 0;
@@ -50,6 +51,7 @@ const nextSlide = () => {
 const currentSlide = (n) => {
   slideIndex = n - 1; // slides are 0-based
   showSlide(slideIndex);
+  showSlideInLightbox(slideIndex);
 };
 
 const sideBar = () => {

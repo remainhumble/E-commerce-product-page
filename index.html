@@ -170,13 +170,20 @@
       <!-- PURCHASE -->
     </div>
     <div id="lightBox">
-      <img src="images/icon-close.svg" id="close-lightbox" alt="close-lightbox">
       <img
-        src="images/image-product-1.jpg"
-        alt="image-product-1"
-        id="lightboxContainer"
+        src="images/icon-close.svg"
+        id="close-lightbox"
+        alt="close-lightbox"
       />
-
+      <div id="lightboxDisplay">
+        <img
+          src="images/image-product-1.jpg"
+          alt="image-product-1"
+          id="lightboxContainer"
+        />
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+      </div>
       <div class="small-img-row">
         <div class="small-img-col">
           <img
