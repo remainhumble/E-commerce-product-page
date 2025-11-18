@@ -6,7 +6,9 @@ const slides = document.querySelectorAll(".display img");
 const small = document.querySelectorAll(".small");
 const slideshow = document.querySelectorAll(".slideshow");
 const lightBox = document.getElementById("lightBox");
-const lightboxImages = document.querySelectorAll("#lightBox .display img");
+const lightboxImages = document.querySelectorAll(
+  "#lightBox #lightboxDisplay img"
+);
 const lightboxContainer = document.getElementById("lightboxContainer");
 const close = document.getElementById("close");
 const closeLightbox = document.getElementById("close-lightbox");
@@ -18,6 +20,14 @@ const initializeSlider = () => {
   // To avoid displaying an image if there aren't any
   if (slides.length > 0) {
     slides[slideIndex].classList.add("displaySlide");
+    intervalId = setInterval(nextSlide, 5000);
+  }
+};
+
+const initializeLightboxSlider = () => {
+  // To avoid displaying an image if there aren't any
+  if (lightboxImages.length > 0) {
+    lightboxImages[slideIndex].classList.add("displaySlide");
     intervalId = setInterval(nextSlide, 5000);
   }
 };
@@ -37,15 +47,31 @@ const showSlide = (index) => {
   slides[slideIndex].classList.add("displaySlide");
 };
 
+const showSlideInLightbox = (index) => {
+  if (index >= lightboxImages.length) {
+    slideIndex = 0;
+  } else if (index < 0) {
+    slideIndex = lightboxImages.length - 1; // set it to the end.
+  }
+
+ lightboxImages.forEach((slide) => {
+    slide.classList.remove("displaySlide");
+  });
+
+  lightboxImages[slideIndex].classList.add("displaySlide");
+};
+
 const prevSlide = () => {
   clearInterval(intervalId); // allow user to take some time to view an image
   slideIndex--;
   showSlide(slideIndex);
+   showSlideInLightbox(slideIndex);
 };
 
 const nextSlide = () => {
   slideIndex++;
   showSlide(slideIndex);
+   showSlideInLightbox(slideIndex);
 };
 
 const currentSlide = (n) => {
@@ -97,7 +123,7 @@ function decrement() {
 
 const showLightBox = () => {
   lightBox.style.display = "flex"; // show the lightbox
-  lightboxContainer.src = item.src; // update image
+
 };
 
 // Loop through each image
@@ -110,7 +136,6 @@ small.forEach((img) => {
   img.addEventListener("click", () => {
     // Change the big image
     document.querySelector(".displaySlide").src = img.src;
-    lightboxContainer.src = img.src;
 
     // Remove border from all thumbnails
     small.forEach((s) => (s.style.border = "none"));
@@ -127,3 +152,4 @@ hamburgerBtn.addEventListener("click", sideBar);
 closeBtn.addEventListener("click", closeSideBar);
 closeLightbox.addEventListener("click", closeLightBox);
 initializeSlider();
+initializeLightboxSlider();
