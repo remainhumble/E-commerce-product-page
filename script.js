@@ -1,155 +1,97 @@
 const hamburgerBtn = document.getElementById("hamburger");
-const closeBtn = document.getElementById("close");
 const overlay = document.getElementById("overlay");
 const mobileMenu = document.getElementById("mobile-menu");
 const slides = document.querySelectorAll(".display img");
 const small = document.querySelectorAll(".small");
-const slideshow = document.querySelectorAll(".slideshow");
 const lightBox = document.getElementById("lightBox");
 const lightboxImages = document.querySelectorAll(
   "#lightBox #lightboxDisplay img"
 );
-const lightboxContainer = document.getElementById("lightboxContainer");
-const close = document.getElementById("close");
+const closeBtn = document.getElementById("close");
 const closeLightbox = document.getElementById("close-lightbox");
 
-let slideIndex = 0;
-let intervalId = null;
+let mainIndex = 0;
+let lightboxIndex = 0;
 
-const initializeSlider = () => {
-  // To avoid displaying an image if there aren't any
-  if (slides.length > 0) {
-    slides[slideIndex].classList.add("displaySlide");
-    intervalId = setInterval(nextSlide, 5000);
-  }
-};
+// MAIN SLIDER
+function showMainSlide(i) {
+  if (i >= slides.length) mainIndex = 0;
+  else if (i < 0) mainIndex = slides.length - 1;
+  else mainIndex = i;
 
-const initializeLightboxSlider = () => {
-  // To avoid displaying an image if there aren't any
-  if (lightboxImages.length > 0) {
-    lightboxImages[slideIndex].classList.add("displaySlide");
-    intervalId = setInterval(nextSlide, 5000);
-  }
-};
+  slides.forEach((s) => s.classList.remove("displaySlide"));
+  slides[mainIndex].classList.add("displaySlide");
+}
 
-// Show slide by index
-const showSlide = (index) => {
-  if (index >= slides.length) {
-    slideIndex = 0;
-  } else if (index < 0) {
-    slideIndex = slides.length - 1; // set it to the end.
-  }
+// LIGHTBOX SLIDER
+function showLightboxSlide(i) {
+  if (i >= lightboxImages.length) lightboxIndex = 0;
+  else if (i < 0) lightboxIndex = lightboxImages.length - 1;
+  else lightboxIndex = i;
 
-  slides.forEach((slide) => {
-    slide.classList.remove("displaySlide");
+  lightboxImages.forEach((s) => s.classList.remove("displaySlide"));
+  lightboxImages[lightboxIndex].classList.add("displaySlide");
+}
+
+// Thumbnail click
+small.forEach((img, idx) => {
+  img.addEventListener("click", () => {
+    showMainSlide(idx);
+    showLightboxSlide(idx);
+
+    small.forEach((s) => {
+      s.style.border = "none";
+      s.style.opacity = "1";
+    });
+    img.style.opacity = "0.5";
+    img.style.border = "3px solid orange";
   });
+});
 
-  slides[slideIndex].classList.add("displaySlide");
-};
-
-const showSlideInLightbox = (index) => {
-  if (index >= lightboxImages.length) {
-    slideIndex = 0;
-  } else if (index < 0) {
-    slideIndex = lightboxImages.length - 1; // set it to the end.
-  }
-
- lightboxImages.forEach((slide) => {
-    slide.classList.remove("displaySlide");
+slides.forEach((img, idx) => {
+  img.addEventListener("click", () => {
+    lightBox.style.display = "flex";
+    showLightboxSlide(idx);
   });
+});
 
-  lightboxImages[slideIndex].classList.add("displaySlide");
-};
-
-const prevSlide = () => {
-  clearInterval(intervalId); // allow user to take some time to view an image
-  slideIndex--;
-  showSlide(slideIndex);
-   showSlideInLightbox(slideIndex);
-};
-
-const nextSlide = () => {
-  slideIndex++;
-  showSlide(slideIndex);
-   showSlideInLightbox(slideIndex);
-};
-
-const currentSlide = (n) => {
-  slideIndex = n - 1; // slides are 0-based
-  showSlide(slideIndex);
-  showSlideInLightbox(slideIndex);
-};
-
-const sideBar = () => {
+// SIDEBAR
+function sideBar() {
   mobileMenu.style.width = "250px";
   overlay.style.display = "block";
-};
+}
 
-const closeSideBar = () => {
+function closeSideBar() {
   mobileMenu.style.width = "0";
   overlay.style.display = "none";
-};
+}
 
-const closeLightBox = () => {
+function closeLightBox() {
   lightBox.style.display = "none";
-};
-
-const incrementBtn = document.getElementById("increment");
-const decrementBtn = document.getElementById("decrement");
-
-let data = 0;
-// Update the displayed count and disable decrement if at zero
-function updateDisplay() {
-  document.getElementById("counting").innerText = data;
-  decrementBtn.disabled = data === 0;
 }
 
-//printing default value of data that is 0 in h2 tag
-document.getElementById("counting").innerText = data;
-
-//creation of increment function
-function increment() {
-  data = data + 1;
-  document.getElementById("counting").innerText = data;
-  updateDisplay();
+// NAV
+function prevSlide() {
+  showMainSlide(mainIndex - 1);
+  showLightboxSlide(lightboxIndex - 1);
 }
 
-//creation of decrement function
-function decrement() {
-  data = data - 1;
-  document.getElementById("counting").innerText = data;
-  updateDisplay();
+function nextSlide() {
+  showMainSlide(mainIndex + 1);
+  showLightboxSlide(lightboxIndex + 1);
 }
-
-const showLightBox = () => {
-  lightBox.style.display = "flex"; // show the lightbox
-
-};
-
-// Loop through each image
-slides.forEach((item) => {
-  item.addEventListener("click", showLightBox);
-});
-
-// Loop through each one
-small.forEach((img) => {
-  img.addEventListener("click", () => {
-    // Change the big image
-    document.querySelector(".displaySlide").src = img.src;
-
-    // Remove border from all thumbnails
-    small.forEach((s) => (s.style.border = "none"));
-    small.forEach((s) => (s.style.opacity = "1"));
-
-    // Add styles to the clicked one
-    img.style.opacity = 0.5;
-    img.style.border = "3px solid orange";
-    clearInterval(intervalId); // allow user to take some time to view an image
-  });
-});
 
 hamburgerBtn.addEventListener("click", sideBar);
 closeBtn.addEventListener("click", closeSideBar);
 closeLightbox.addEventListener("click", closeLightBox);
+
+function initializeSlider() {
+  showMainSlide(0);
+}
+
+function initializeLightboxSlider() {
+  showLightboxSlide(0);
+}
+
 initializeSlider();
 initializeLightboxSlider();

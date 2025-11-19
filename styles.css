@@ -307,26 +307,17 @@ img {
 
 .display img {
   display: none;
-}
-
-.display img.displaySlide {
-  display: block;
   margin: 0 auto;
 }
-
-#lightBox {
-  display: none;
+.displaySlide {
+  display: block;
 }
-
 #lightboxDisplay img {
   display: none;
 }
-
-#lightboxDisplay img.displaySlide {
+#lightboxDisplay .displaySlide {
   display: block;
-  margin: 0 auto;
 }
-
 
 @media (min-width: 1025px) {
   .display {
