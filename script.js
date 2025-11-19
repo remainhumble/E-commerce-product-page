@@ -1,97 +1,178 @@
 const hamburgerBtn = document.getElementById("hamburger");
+const closeBtn = document.getElementById("close");
 const overlay = document.getElementById("overlay");
 const mobileMenu = document.getElementById("mobile-menu");
-const slides = document.querySelectorAll(".display img");
-const small = document.querySelectorAll(".small");
+const slides = document.querySelectorAll("#display img, .display img");
+const pageThumbs = document.querySelectorAll(".slideshow .small");
+const lightboxThumbs = document.querySelectorAll("#lightBox .small");
+const slideshow = document.querySelectorAll(".slideshow");
 const lightBox = document.getElementById("lightBox");
 const lightboxImages = document.querySelectorAll(
   "#lightBox #lightboxDisplay img"
 );
-const closeBtn = document.getElementById("close");
+const lightboxContainer = document.getElementById("lightboxContainer");
 const closeLightbox = document.getElementById("close-lightbox");
 
-let mainIndex = 0;
-let lightboxIndex = 0;
+let slideIndex = 0;
+let intervalId = null;
 
-// MAIN SLIDER
-function showMainSlide(i) {
-  if (i >= slides.length) mainIndex = 0;
-  else if (i < 0) mainIndex = slides.length - 1;
-  else mainIndex = i;
+const initializeSlider = () => {
+  // To avoid displaying an image if there aren't any
+  if (slides.length > 0) {
+    slides[slideIndex].classList.add("displaySlide");
+    intervalId = setInterval(nextSlide, 5000);
+  }
+};
 
-  slides.forEach((s) => s.classList.remove("displaySlide"));
-  slides[mainIndex].classList.add("displaySlide");
-}
+const initializeLightboxSlider = () => {
+  // Only initialize the lightbox slider on large screens where the
+  // lightbox is intended to be used (matches CSS breakpoint).
+  if (!window.matchMedia("(min-width: 1025px)").matches) return;
 
-// LIGHTBOX SLIDER
-function showLightboxSlide(i) {
-  if (i >= lightboxImages.length) lightboxIndex = 0;
-  else if (i < 0) lightboxIndex = lightboxImages.length - 1;
-  else lightboxIndex = i;
+  // To avoid displaying an image if there aren't any
+  if (lightboxImages.length > 0) {
+    lightboxImages[slideIndex].classList.add("displaySlide");
+    intervalId = setInterval(nextSlide, 5000);
+  }
+};
 
-  lightboxImages.forEach((s) => s.classList.remove("displaySlide"));
-  lightboxImages[lightboxIndex].classList.add("displaySlide");
-}
+// Show slide by index
+const showSlide = (index) => {
+  if (index >= slides.length) {
+    slideIndex = 0;
+  } else if (index < 0) {
+    slideIndex = slides.length - 1; // set it to the end.
+  }
 
-// Thumbnail click
-small.forEach((img, idx) => {
-  img.addEventListener("click", () => {
-    showMainSlide(idx);
-    showLightboxSlide(idx);
-
-    small.forEach((s) => {
-      s.style.border = "none";
-      s.style.opacity = "1";
-    });
-    img.style.opacity = "0.5";
-    img.style.border = "3px solid orange";
+  slides.forEach((slide) => {
+    slide.classList.remove("displaySlide");
   });
-});
 
-slides.forEach((img, idx) => {
-  img.addEventListener("click", () => {
-    lightBox.style.display = "flex";
-    showLightboxSlide(idx);
+  slides[slideIndex].classList.add("displaySlide");
+};
+
+const showSlideInLightbox = (index) => {
+  if (index >= lightboxImages.length) {
+    slideIndex = 0;
+  } else if (index < 0) {
+    slideIndex = lightboxImages.length - 1; // set it to the end.
+  }
+
+  lightboxImages.forEach((slide) => {
+    slide.classList.remove("displaySlide");
   });
-});
 
-// SIDEBAR
-function sideBar() {
+  lightboxImages[slideIndex].classList.add("displaySlide");
+};
+
+const prevSlide = () => {
+  clearInterval(intervalId); // allow user to take some time to view an image
+  slideIndex--;
+  showSlide(slideIndex);
+  showSlideInLightbox(slideIndex);
+};
+
+const nextSlide = () => {
+  slideIndex++;
+  showSlide(slideIndex);
+  showSlideInLightbox(slideIndex);
+};
+
+const currentSlide = (n) => {
+  slideIndex = n - 1; // slides are 0-based
+  showSlide(slideIndex);
+  showSlideInLightbox(slideIndex);
+};
+
+const sideBar = () => {
   mobileMenu.style.width = "250px";
   overlay.style.display = "block";
-}
+};
 
-function closeSideBar() {
+const closeSideBar = () => {
   mobileMenu.style.width = "0";
   overlay.style.display = "none";
-}
+};
 
-function closeLightBox() {
+const closeLightBox = () => {
   lightBox.style.display = "none";
+};
+
+const incrementBtn = document.getElementById("increment");
+const decrementBtn = document.getElementById("decrement");
+
+let data = 0;
+// Update the displayed count and disable decrement if at zero
+function updateDisplay() {
+  document.getElementById("counting").innerText = data;
+  decrementBtn.disabled = data === 0;
 }
 
-// NAV
-function prevSlide() {
-  showMainSlide(mainIndex - 1);
-  showLightboxSlide(lightboxIndex - 1);
+//printing default value of data that is 0 in h2 tag
+document.getElementById("counting").innerText = data;
+
+//creation of increment function
+function increment() {
+  data = data + 1;
+  document.getElementById("counting").innerText = data;
+  updateDisplay();
 }
 
-function nextSlide() {
-  showMainSlide(mainIndex + 1);
-  showLightboxSlide(lightboxIndex + 1);
+//creation of decrement function
+function decrement() {
+  data = data - 1;
+  document.getElementById("counting").innerText = data;
+  updateDisplay();
 }
+
+const showLightBox = () => {
+  // Prevent the lightbox from appearing on small screens. The lightbox
+  // UI is designed for larger viewports; on smaller screens we simply
+  // don't open it and keep the inline page image interaction instead.
+  if (!window.matchMedia("(min-width: 1025px)").matches) return;
+
+  lightBox.style.display = "flex"; // show the lightbox
+};
+
+// Loop through each image
+slides.forEach((item) => {
+  item.addEventListener("click", showLightBox);
+});
+
+// Helper to update thumbnail styles
+const updateThumbnailStyles = (thumbList, activeIndex) => {
+  thumbList.forEach((s, i) => {
+    s.style.border = i === activeIndex ? "3px solid orange" : "none";
+    s.style.opacity = i === activeIndex ? 0.5 : "1";
+  });
+};
+
+// Click handlers for page thumbnails
+pageThumbs.forEach((img, idx) => {
+  img.addEventListener("click", () => {
+    slideIndex = idx;
+    showSlide(slideIndex);
+    showSlideInLightbox(slideIndex);
+    updateThumbnailStyles(pageThumbs, slideIndex);
+    updateThumbnailStyles(lightboxThumbs, slideIndex);
+    clearInterval(intervalId); // allow user to take some time to view an image
+  });
+});
+
+// Click handlers for lightbox thumbnails (keep both in sync)
+lightboxThumbs.forEach((img, idx) => {
+  img.addEventListener("click", () => {
+    slideIndex = idx;
+    showSlide(slideIndex);
+    showSlideInLightbox(slideIndex);
+    updateThumbnailStyles(pageThumbs, slideIndex);
+    updateThumbnailStyles(lightboxThumbs, slideIndex);
+    clearInterval(intervalId);
+  });
+});
 
 hamburgerBtn.addEventListener("click", sideBar);
 closeBtn.addEventListener("click", closeSideBar);
 closeLightbox.addEventListener("click", closeLightBox);
-
-function initializeSlider() {
-  showMainSlide(0);
-}
-
-function initializeLightboxSlider() {
-  showLightboxSlide(0);
-}
-
 initializeSlider();
 initializeLightboxSlider();

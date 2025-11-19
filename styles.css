@@ -307,16 +307,24 @@ img {
 
 .display img {
   display: none;
+}
+
+.display img.displaySlide {
+  display: block;
   margin: 0 auto;
 }
-.displaySlide {
-  display: block;
+
+#lightBox {
+  display: none;
 }
+
 #lightboxDisplay img {
   display: none;
 }
-#lightboxDisplay .displaySlide {
+
+#lightboxDisplay img.displaySlide {
   display: block;
+  margin: 0 auto;
 }
 
 @media (min-width: 1025px) {
@@ -454,14 +462,15 @@ img {
     img {
       width: 100%;
       max-width: 350px;
-      height: 80%;
-      max-height: 300px;
+      height: 100%;
+
       border-radius: 8px;
       object-fit: cover;
     }
     #close-lightbox {
       position: relative;
-      left: 100px;
+      left: 150px;
+      top: -5px;
       cursor: pointer;
       width: 25px;
       height: 25px;
@@ -477,12 +486,20 @@ img {
     }
 
     .prev {
-      left: 500px;
+      left: 425px;
+    }
+
+    .prev:hover {
+      color: var(--orange);
     }
 
     /* Position the "next button" to the right */
     .next {
-      right: 500px;
+      right: 425px;
+    }
+
+    .next:hover {
+      color: var(--orange);
     }
 
     #lightboxDisplay {
@@ -498,8 +515,6 @@ img {
 
 #close {
   position: absolute;
-  top: 20px;
-  right: 30px;
   cursor: pointer;
   font-size: 50px;
 }
@@ -514,7 +529,7 @@ img {
   max-width: 90%;
   max-height: 30%;
   .small {
-    max-width: 100px;
+    max-width: 80px;
   }
 
   .small-img-col {
