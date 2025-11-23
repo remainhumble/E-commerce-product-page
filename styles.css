@@ -72,6 +72,7 @@ header {
 
 #shopping-cart {
   cursor: pointer;
+  
 }
 
 #hamburger {
@@ -256,7 +257,8 @@ input[type="number"] {
 }
 
 #basket {
-  display: flex;
+  /* Hidden by default; shown when `.open` is applied by JS */
+  display: none;
   flex-direction: column;
   width: 100%;
   box-shadow: 5px 10px 15px gray;
@@ -266,6 +268,15 @@ input[type="number"] {
   background-color: var(--white);
   z-index: var(--z-index-modal);
   letter-spacing: 0.25px;
+  max-width: 416px;
+  position: absolute;
+  right: 10px;
+}
+
+/* Visible state controlled by JS */
+#basket.open {
+  display: flex;
+  position: fixed;
 }
 
 .item-img img {
@@ -328,6 +339,7 @@ input[type="number"] {
   color: var(--black-lightbox);
   font-weight: 700;
   padding: 12px;
+
 }
 
 #checkout:hover {
@@ -602,7 +614,8 @@ img {
   }
 
   #basket {
-    display: flex;
+    /* keep hidden by default on large screens as well */
+    display: none;
     flex-direction: column;
     width: fit-content;
     box-shadow: 5px 10px 15px gray;
@@ -614,6 +627,10 @@ img {
     z-index: var(--z-index-modal);
     letter-spacing: 1px;
     font-size: 16px;
+  }
+
+  #basket.open {
+    display: flex;
   }
 }
 

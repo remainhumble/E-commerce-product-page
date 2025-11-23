@@ -13,13 +13,150 @@ const lightboxImages = document.querySelectorAll(
 const lightboxContainer = document.getElementById("lightboxContainer");
 const closeLightbox = document.getElementById("close-lightbox");
 const cartIcon = document.getElementById("shopping-cart");
+const basket = document.getElementById("basket");
+const belowCartTitle = document.getElementById("below-cart-title");
+const discountedPrice = document.getElementById("discounted-price");
+const addToCartBtn = document.getElementById("add-to-cart"); 
 
 let slideIndex = 0;
 let intervalId = null;
+const renderItem = () => {
+  // Render the contents of the `cart` array into the basket element.
+  basket.innerHTML = '';
 
-cartIcon.addEventListener("click", () => {
-  console.log("Cart icon clicked");
-})
+  if (!Array.isArray(cart) || cart.length === 0) {
+    basket.innerHTML = `
+      <h4 id="cart-title">Cart</h4>
+      <div id="cart-empty" style="padding:16px;">Your cart is empty.</div>
+    `;
+    return;
+  }
+
+  // Render all items (supports multiple items)
+  let html = `<h4 id="cart-title">Cart</h4>`;
+  cart.forEach((item, idx) => {
+    const unitPrice = typeof item.price === 'number' ? item.price : 0;
+    html += `
+      <div class="cart-row" data-id="${item.id}">
+        <div class="item-img"><img src="${item.imgSrc || 'images/image-product-1-thumbnail.jpg'}" alt="${item.name || ''}"></div>
+        <div id="product-info">
+          <div id="product-name"><h4>${item.name || ''}</h4></div>
+          <div id="details">
+            <span class="unit-price"><small>$</small>${unitPrice.toFixed(2)}</span>
+            <div class="units">
+              <span class="quantity">x ${item.numberOfUnits}</span>
+              <span class="total-by-quantity">$${(unitPrice * item.numberOfUnits).toFixed(2)}</span>
+            </div>
+          </div>
+        </div>
+        <div class="delete"><button class="delete-item" data-id="${item.id}" style="background:none;border:none;cursor:pointer;"><img src="images/icon-delete.svg" alt="remove-item"></button></div>
+      </div>
+    `;
+  });
+
+  html += `<button id="checkout">Checkout</button>`;
+  basket.innerHTML = html;
+
+  // attach delete handlers
+  basket.querySelectorAll('.delete-item').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = Number(btn.dataset.id);
+      removeFromCart(id);
+    });
+  });
+};
+
+// CART ARRAY
+let cart = JSON.parse(localStorage.getItem("CART")) || [];
+
+// Remove an item from the cart (by id)
+const removeFromCart = (id) => {
+  cart = cart.filter((it) => it.id !== id);
+  updateCart();
+};
+
+// Add to cart: supports two modes
+// - called with an `id` to add a single unit of that product
+// - called with no args (from the page Add-to-cart button) to add `data` units of the first product
+const addToCart = (id) => {
+  // Helper to read the source product entry safely
+  const sourceProduct = (typeof products !== 'undefined' && Array.isArray(products) && products[0])
+    ? products[0]
+    : { id: 0, name: 'Fall Limited Edition Sneakers', price: 125, imgSrc: 'images/image-product-1-thumbnail.jpg', instock: 3 };
+
+  // Mode A: add by id (single unit)
+  if (typeof id === 'number') {
+    const existing = cart.find((item) => item.id === id);
+    if (existing) {
+      existing.numberOfUnits = (existing.numberOfUnits || 0) + 1;
+    } else {
+      const productItem = (typeof products !== 'undefined' && Array.isArray(products))
+        ? products.find((p) => p.id === id)
+        : null;
+      if (!productItem) return;
+      cart.push({ id: productItem.id, name: productItem.name, price: productItem.price, imgSrc: productItem.imgSrc, numberOfUnits: 1 });
+    }
+    updateCart();
+    return;
+  }
+
+  // Mode B: page Add-to-cart button: add `data` units of the first product
+  const qtyToAdd = Number(data) || 0;
+  if (qtyToAdd <= 0) return;
+
+  const prod = sourceProduct;
+  const existing = cart.find((it) => it.id === prod.id);
+  const alreadyInCart = existing ? existing.numberOfUnits : 0;
+  const available = typeof prod.instock === 'number' ? prod.instock - alreadyInCart : Infinity;
+  const toAdd = Math.min(qtyToAdd, Math.max(0, available));
+  if (toAdd <= 0) return;
+
+  if (existing) {
+    existing.numberOfUnits = (existing.numberOfUnits || 0) + toAdd;
+  } else {
+    cart.push({ id: prod.id, name: prod.name, price: prod.price, imgSrc: prod.imgSrc, numberOfUnits: toAdd });
+  }
+
+  // reset selection
+  data = 0;
+  updateDisplay();
+
+  updateCart();
+  // open basket to show user
+  basket.classList.add('open');
+  cartIcon.style.filter = 'brightness(0)';
+};
+
+const toggleBasketVisibility = () => {
+  // Toggle the visible state on the basket container
+  basket.classList.toggle("open");
+  // Visual feedback on the cart icon when open
+  if (basket.classList.contains("open")) {
+    cartIcon.style.filter = "brightness(0)";
+  } else {
+    cartIcon.style.filter = "";
+  }
+};
+
+cartIcon.addEventListener("click", (ev) => {
+  ev.stopPropagation(); // avoid the document click handler immediately closing it
+  // render current cart contents then toggle visibility
+  renderItem();
+  toggleBasketVisibility();
+});
+
+// Close basket when clicking outside
+document.addEventListener("click", (ev) => {
+  const target = ev.target;
+  if (
+    !basket.contains(target) &&
+    target !== cartIcon &&
+    basket.classList.contains("open")
+  ) {
+    basket.classList.remove("open");
+    cartIcon.style.filter = "";
+  }
+});
 
 const initializeSlider = () => {
   // To avoid displaying an image if there aren't any
@@ -176,8 +313,20 @@ lightboxThumbs.forEach((img, idx) => {
   });
 });
 
+const updateCart = () => {
+  renderItem();
+  // renderSubtotal();
+
+  // SAVE CART TO LOCAL STORAGE
+  localStorage.setItem("CART", JSON.stringify(cart));
+};
+
 hamburgerBtn.addEventListener("click", sideBar);
 closeBtn.addEventListener("click", closeSideBar);
 closeLightbox.addEventListener("click", closeLightBox);
+if (addToCartBtn) {
+  // call without id so the page selection (`data`) is used
+  addToCartBtn.addEventListener('click', () => addToCart());
+}
 initializeSlider();
 initializeLightboxSlider();

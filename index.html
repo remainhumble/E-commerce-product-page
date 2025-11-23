@@ -14,6 +14,7 @@
 
     <title>Frontend Mentor | E-commerce product page</title>
     <link rel="stylesheet" href="styles.css" />
+    <script defer src="product.js"></script>
     <script defer src="script.js"></script>
   </head>
   <body>
@@ -64,21 +65,10 @@
 
     <!-- HEADER -->
 
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Font Awesome Example</title>
-        <link
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
-        <div id="basket">
-          <h4 id="cart-title">Cart</h4>
+    <!-- CART -->
 
-          <div id="cart-item">
+    <div id="basket">
+      <!-- <div id="cart-item">
             <div class="item-img">
               <img src="images/image-product-1-thumbnail.jpg" alt="item" />
             </div>
@@ -98,13 +88,14 @@
              <img src="images/icon-delete.svg" alt="remove-item">
             </div>
           </div>
-          <button id="checkout">Checkout</button>
-        </div>
-      </body>
-    </html>
+          <button id="checkout">Checkout</button> -->
+    </div>
+
+    <!-- CART -->
 
     <div id="grid">
       <!-- SLIDESHOW -->
+
       <div class="slideshow">
         <div class="display">
           <img src="images/image-product-1.jpg" alt="image-product-1" />
@@ -168,9 +159,8 @@
         <!-- PURCHASE -->
 
         <div id="price">
-          <span id="discounted-price"
-            >$125.00<span id="reduced">50%</span></span
-          >
+          <span id="discounted-price">$125.00</span
+          ><span id="reduced">50%</span>
           <span id="original-price"><s>$250.00</s></span>
         </div>
 
@@ -186,19 +176,6 @@
           <button id="increment" onclick="increment()">
             <img src="images/icon-plus.svg" alt="increase-quantity" />
           </button>
-          <!-- <button id="decrease">
-          
-          </button>
-          <div
-            type="number"
-            id="quantity"
-            class="quantity-input"
-            
-          ></div>
-          <button id="increase" onclick="increase()">
-            
-            +
-          </button> -->
         </div>
         <button id="add-to-cart">
           <span>
