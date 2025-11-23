@@ -37,7 +37,7 @@
         <nav aria-label="Main navigation" id="mobile-menu">
           <ul role="menu">
             <li>
-              <a href="#" style="border-bottom: none">
+              <a id="closeSidebar" href="#" style="border-bottom: none">
                 <img id="close" src="images/icon-close.svg" alt="close"
               /></a>
             </li>
@@ -52,12 +52,56 @@
       </div>
 
       <div id="right">
-        <img class="cart" src="images/icon-cart.svg" alt="shopping-cart" />
+        <img
+          class="cart"
+          id="shopping-cart"
+          src="images/icon-cart.svg"
+          alt="shopping-cart"
+        />
         <img id="avatar" src="images/image-avatar.png" alt="avatar-image" />
       </div>
     </header>
 
     <!-- HEADER -->
+
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Font Awesome Example</title>
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+          rel="stylesheet"
+        />
+      </head>
+      <body>
+        <div id="basket">
+          <h4 id="cart-title">Cart</h4>
+
+          <div id="cart-item">
+            <div class="item-img">
+              <img src="images/image-product-1-thumbnail.jpg" alt="item" />
+            </div>
+            <div id="product-info">
+              <div id="product-name">
+                <h4>Fall Limited Edition Sneakers</h4>
+              </div>
+              <div id="details">
+                <span class="unit-price"><small>$</small>125.00</span>
+                <div class="units">
+                  <span id="quantity">x 3</span>
+                  <span id="total-by-quantity">$375.00</span>
+                </div>
+              </div>
+            </div>
+            <div class="delete" onclick="changeNumberOfUnits('minus', 1)">
+             <img src="images/icon-delete.svg" alt="remove-item">
+            </div>
+          </div>
+          <button id="checkout">Checkout</button>
+        </div>
+      </body>
+    </html>
 
     <div id="grid">
       <!-- SLIDESHOW -->
@@ -160,7 +204,7 @@
           <span>
             <img
               style="filter: brightness(0)"
-              class="cart"
+              class="cart shop"
               src="images/icon-cart.svg"
               alt="add-to-cart"
             />Add to cart</span
