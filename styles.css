@@ -70,6 +70,10 @@ header {
   height: 0.85em;
 }
 
+#shopping-cart {
+  cursor: pointer;
+}
+
 #hamburger {
   margin-right: 2em;
   margin-top: 7px;
@@ -113,13 +117,17 @@ header {
   border-bottom: 3px solid var(--orange);
 }
 
+#closeSidebar {
+  position: relative;
+  top: -50px;
+  padding: 0;
+}
+
 #desktop-menu {
   display: none;
 }
 
 #close {
-  position: relative;
-  top: -50px;
   cursor: pointer;
 }
 
@@ -193,12 +201,6 @@ h1 {
   cursor: pointer;
 }
 
-#quantity {
-  width: 65%;
-  font-weight: 700;
-  font-size: 16px;
-}
-
 #increment {
   margin-top: 3px;
 }
@@ -245,6 +247,93 @@ input[type="number"] {
 
 #add-to-cart img {
   margin-right: 12px;
+}
+
+/* shopping cart */
+
+.item-img img {
+  width: 70px;
+}
+
+#basket {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: 5px 10px 15px gray;
+  position: absolute;
+  top: 90px;
+  border-radius: 5px;
+  background-color: var(--white);
+  z-index: var(--z-index-modal);
+  letter-spacing: 0.25px;
+}
+
+.item-img img {
+  border-radius: 5px;
+}
+
+#cart-title {
+  padding: 15px;
+}
+
+#cart-item {
+  border-top: 1px solid var(--grayish-blue);
+  display: flex;
+  padding: 15px;
+}
+
+#product-name h4 {
+  color: var(--dark-grayish-blue);
+  font-weight: 400;
+}
+
+#product-info {
+  overflow: hidden;
+  width: 100%;
+  padding: 0 15px;
+}
+
+#details {
+  display: flex;
+  flex-direction: row;
+  float: left;
+}
+
+#quantity {
+  margin: 0 6px;
+}
+
+.unit-price,
+#quantity {
+  color: var(--dark-grayish-blue);
+}
+
+#total-by-quantity {
+  font-weight: 700;
+}
+
+.delete {
+  cursor: pointer;
+  margin: 10px;
+  color: var(--grayish-blue);
+  width: 25px;
+}
+
+#checkout {
+  margin: 15px;
+  padding: 8px;
+  border: none;
+  border-radius: 9px;
+  background-color: var(--orange);
+  color: var(--black-lightbox);
+  font-weight: 700;
+  padding: 12px;
+}
+
+#checkout:hover {
+  box-shadow: none;
+  border-color: rgb(252, 171, 101);
+  background-color: rgb(252, 171, 101);
 }
 
 /* SLIDES */
@@ -511,12 +600,31 @@ img {
       margin: 0;
     }
   }
+
+  #basket {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    box-shadow: 5px 10px 15px gray;
+    position: absolute;
+    top: 70px;
+    right: 50px;
+    border-radius: 5px;
+    background-color: var(--white);
+    z-index: var(--z-index-modal);
+    letter-spacing: 1px;
+    font-size: 16px;
+  }
 }
 
 #close {
-  position: absolute;
   cursor: pointer;
   font-size: 50px;
+}
+
+#close:hover {
+  filter: brightness(0) saturate(100%) invert(66%) sepia(33%) saturate(6571%)
+    hue-rotate(347deg) brightness(101%) contrast(101%);
 }
 
 #caption {

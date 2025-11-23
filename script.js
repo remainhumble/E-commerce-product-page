@@ -1,5 +1,5 @@
 const hamburgerBtn = document.getElementById("hamburger");
-const closeBtn = document.getElementById("close");
+const closeBtn = document.getElementById("closeSidebar");
 const overlay = document.getElementById("overlay");
 const mobileMenu = document.getElementById("mobile-menu");
 const slides = document.querySelectorAll("#display img, .display img");
@@ -12,9 +12,14 @@ const lightboxImages = document.querySelectorAll(
 );
 const lightboxContainer = document.getElementById("lightboxContainer");
 const closeLightbox = document.getElementById("close-lightbox");
+const cartIcon = document.getElementById("shopping-cart");
 
 let slideIndex = 0;
 let intervalId = null;
+
+cartIcon.addEventListener("click", () => {
+  console.log("Cart icon clicked");
+})
 
 const initializeSlider = () => {
   // To avoid displaying an image if there aren't any
