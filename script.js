@@ -13,13 +13,46 @@ const lightboxImages = document.querySelectorAll(
 const lightboxContainer = document.getElementById("lightboxContainer");
 const closeLightbox = document.getElementById("close-lightbox");
 const cartIcon = document.getElementById("shopping-cart");
+const basket = document.getElementById("basket");
 
 let slideIndex = 0;
 let intervalId = null;
 
-cartIcon.addEventListener("click", () => {
-  console.log("Cart icon clicked");
-})
+
+
+
+const toggleBasketVisibility = () => {
+  // Toggle the visible state on the basket container
+
+  basket.classList.toggle("open");
+  // Visual feedback on the cart icon when open
+  if (basket.classList.contains("open")) {
+    cartIcon.style.filter = "brightness(0)";
+  } else {
+    cartIcon.style.filter = "";
+  }
+};
+
+cartIcon.addEventListener("click", (ev) => {
+  ev.stopPropagation(); // avoid the document click handler immediately closing it
+  // render current cart contents then toggle visibility
+  // renderItem();
+  toggleBasketVisibility();
+});
+
+// Close basket when clicking outside
+document.addEventListener("click", (ev) => {
+  const target = ev.target;
+  if (
+    !basket.contains(target) &&
+    target !== cartIcon &&
+    basket.classList.contains("open")
+  ) {
+    basket.classList.remove("open");
+    cartIcon.style.filter = "";
+  }
+});
+
 
 const initializeSlider = () => {
   // To avoid displaying an image if there aren't any
