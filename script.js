@@ -20,7 +20,6 @@ let intervalId = null;
 
 
 
-
 const toggleBasketVisibility = () => {
   // Toggle the visible state on the basket container
 
@@ -32,6 +31,95 @@ const toggleBasketVisibility = () => {
     cartIcon.style.filter = "";
   }
 };
+
+// RENDER CART ITEM FROM product.js
+const totalItemsEl = document.querySelector('.total-items-in-cart');
+let cartState = {}; // { [productId]: quantity }
+
+const renderItem = () => {
+  const cartItemContainer = document.getElementById('cart-item');
+  const checkoutBtn = document.getElementById('checkout');
+
+  const totalQty = Object.values(cartState).reduce((a, b) => a + b, 0);
+  if (totalItemsEl) totalItemsEl.textContent = totalQty;
+
+  if (totalQty === 0) {
+    if (cartItemContainer) cartItemContainer.innerHTML = '<p class="empty">Your cart is empty.</p>';
+    if (checkoutBtn) checkoutBtn.style.display = 'none';
+    return;
+  }
+
+  if (checkoutBtn) checkoutBtn.style.display = '';
+
+  // Rebuild the cart items markup from cartState and products array
+  if (!cartItemContainer) return;
+  cartItemContainer.innerHTML = '';
+
+  Object.entries(cartState).forEach(([id, qty]) => {
+    const product = products.find((p) => String(p.id) === String(id));
+    if (!product) return;
+    const totalPrice = (product.price * qty).toFixed(2);
+    const itemHTML = `
+      <div class="cart-row">
+        <div class="item-img"><img src="${product.imgSrc}" alt="${product.name}" /></div>
+        <div id="product-info">
+          <div id="product-name"><h4>${product.name}</h4></div>
+          <div id="details">
+            <span class="unit-price"><small>$</small>${product.price.toFixed(2)}</span>
+            <div class="units">
+              <span class="quantity">x ${qty}</span>
+              <span class="total-by-quantity">$${totalPrice}</span>
+            </div>
+          </div>
+        </div>
+        <div class="delete"><img src="images/icon-delete.svg" alt="remove-item" data-id="${product.id}" class="delete-btn" /></div>
+      </div>
+    `;
+    cartItemContainer.insertAdjacentHTML('beforeend', itemHTML);
+  });
+
+  // Attach delete handlers
+  cartItemContainer.querySelectorAll('.delete-btn').forEach((btn) => {
+    btn.addEventListener('click', function () {
+      const id = Number(this.dataset.id);
+      delete cartState[id];
+      renderItem();
+    });
+  });
+};
+
+// Update cart by adding `quantity` units of product at `productIndex` in `products`
+function updateCart(quantity, productIndex) {
+  const product = products[productIndex];
+  if (!product) return;
+
+  if (quantity <= 0) {
+    delete cartState[product.id];
+  } else {
+    cartState[product.id] = (cartState[product.id] || 0) + Number(quantity);
+    // Do not exceed available stock
+    if (cartState[product.id] > product.instock) {
+      cartState[product.id] = product.instock;
+    }
+  }
+
+  renderItem();
+}
+
+// Wire the Add to cart button to use the current `data` (counter) value.
+const addToCartBtn = document.getElementById('add-to-cart');
+if (addToCartBtn) {
+  addToCartBtn.addEventListener('click', () => {
+    const qtyToAdd = Number(data) || 0;
+    if (qtyToAdd > 0) {
+      // default to first product (index 0) — adjust if multiple products exist
+      updateCart(qtyToAdd, 0);
+      // reset displayed counter after adding
+      data = 0;
+      updateDisplay();
+    }
+  });
+}
 
 cartIcon.addEventListener("click", (ev) => {
   ev.stopPropagation(); // avoid the document click handler immediately closing it
@@ -52,7 +140,6 @@ document.addEventListener("click", (ev) => {
     cartIcon.style.filter = "";
   }
 });
-
 
 const initializeSlider = () => {
   // To avoid displaying an image if there aren't any

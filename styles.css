@@ -70,6 +70,23 @@ header {
   height: 0.85em;
 }
 
+.view-shopping-cart {
+  position: relative;
+  margin-top: 26px;
+}
+
+.view-shopping-cart .total-items-in-cart {
+  margin-left: 10px;
+  padding: 1px 6px;
+  background-color: var(--orange);
+  color: var(--white);
+  border-radius: 5px;
+  font-size: 10px;
+  position: relative;
+  top: -26px;
+  font-weight: 700;
+}
+
 #shopping-cart {
   cursor: pointer;
 }
@@ -125,10 +142,6 @@ header {
 
 #desktop-menu {
   display: none;
-}
-
-#close {
-  cursor: pointer;
 }
 
 ul {
@@ -608,7 +621,7 @@ img {
   }
 
   #basket {
-    display: flex;
+    display: none;
     flex-direction: column;
     width: fit-content;
     box-shadow: 5px 10px 15px gray;
@@ -620,6 +633,12 @@ img {
     z-index: var(--z-index-modal);
     letter-spacing: 1px;
     font-size: 16px;
+  }
+
+  /* Visible state controlled by JS */
+  #basket.open {
+    display: flex;
+    position: fixed;
   }
 }
 
