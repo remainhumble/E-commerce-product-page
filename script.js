@@ -14,6 +14,7 @@ const lightboxContainer = document.getElementById("lightboxContainer");
 const closeLightbox = document.getElementById("close-lightbox");
 const cartIcon = document.getElementById("shopping-cart");
 const basket = document.getElementById("basket");
+const viewShoppingCart = document.querySelector(".view-shopping-cart");
 
 let slideIndex = 0;
 let intervalId = null;
@@ -308,8 +309,26 @@ lightboxThumbs.forEach((img, idx) => {
   });
 });
 
+viewShoppingCart.addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleBasketVisibility();
+});
+
+viewShoppingCart.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleBasketVisibility();
+  }
+});
 hamburgerBtn.addEventListener("click", sideBar);
 closeBtn.addEventListener("click", closeSideBar);
 closeLightbox.addEventListener("click", closeLightBox);
+closeLightbox.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    closeLightBox();
+  }
+});
 initializeSlider();
 initializeLightboxSlider();

@@ -37,9 +37,14 @@
         <nav aria-label="Main navigation" id="mobile-menu">
           <ul role="menu">
             <li>
-              <a id="closeSidebar" href="#" style="border-bottom: none">
-                <img id="close" src="images/icon-close.svg" alt="close"
-              /></a>
+              <a
+                id="closeSidebar"
+                href="#"
+                style="border-bottom: none"
+                aria-label="close-sidebar"
+              >
+                <img id="close" src="images/icon-close.svg" alt="close" />
+              </a>
             </li>
             <li><a href="#">Collections</a></li>
             <li><a href="#">Men</a></li>
@@ -52,7 +57,7 @@
       </div>
 
       <div id="right">
-        <div class="view-shopping-cart">
+        <div class="view-shopping-cart" aria-label="view-shopping-cart" tabindex="0">
           <img
             class="cart"
             id="shopping-cart"
@@ -66,32 +71,19 @@
     </header>
     <!-- HEADER -->
 
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Font Awesome Example</title>
-        <link
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
-        <div id="basket">
-          <h4 id="cart-title">Cart</h4>
-          <div id="cart-item">
-            <p class="empty">Your cart is empty.</p>
-          </div>
-          <button id="checkout" style="display: none">Checkout</button>
-        </div>
-      </body>
-    </html>
+    <div id="basket">
+      <h4 id="cart-title">Cart</h4>
+      <div id="cart-item">
+        <p class="empty">Your cart is empty.</p>
+      </div>
+      <button id="checkout" style="display: none">Checkout</button>
+    </div>
 
     <div id="grid">
       <!-- SLIDESHOW -->
       <div class="slideshow">
         <div class="display">
-          <img src="images/image-product-1.jpg" alt="image-product-1" />
+          <img src="images/image-product-1.jpg" alt="image-product-1" aria-labelledby="description" />
 
           <img src="images/image-product-2.jpg" alt="image-product-2" />
 
@@ -141,7 +133,7 @@
       <div id="info">
         <span id="brand">Sneaker Company</span>
         <h1>Fall Limited Edition Sneakers</h1>
-        <p>
+        <p id="description">
           These low-profile sneakers are your perfect casual wear companion.
           Featuring a durable rubber outer sole, they’ll withstand everything
           the weather can offer.
@@ -186,6 +178,7 @@
     </div>
     <div id="lightBox">
       <img
+      tabindex="0"
         src="images/icon-close.svg"
         id="close-lightbox"
         alt="close-lightbox"
